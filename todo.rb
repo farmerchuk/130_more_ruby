@@ -116,6 +116,32 @@ class TodoList
     end
   end
 
+  def find_by_title(title)
+    todos.each { |todo| return todo if todo.title == title }
+    nil
+  end
+
+  def all_done
+    todos.select { |todo| todo.done? }
+  end
+
+  def all_not_done
+    todos.select { |todo| !todo.done? }
+  end
+
+  def mark_done(title)
+    match = find_by_title(title)
+    match.done! if match
+  end
+
+  def mark_all_done
+    todos.each { |todo| todo.done! }
+  end
+
+  def mark_all_undone
+    todos.each { |todo| todo.undone! }
+  end
+
   def to_s
     text = "--- #{title} ---\n"
     text << todos.map(&:to_s).join("\n")
@@ -125,5 +151,19 @@ class TodoList
   private
 
   attr_accessor :todos
-
 end
+
+todo1 = Todo.new("Buy milk")
+todo2 = Todo.new("Clean room")
+todo3 = Todo.new("Go to gym")
+
+list = TodoList.new("Today's Todos")
+list.add(todo1)
+list.add(todo2)
+list.add(todo3)
+
+list.mark_all_done
+list.mark_all_undone
+
+p list.all_done
+p list.all_not_done
