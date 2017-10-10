@@ -142,6 +142,10 @@ class TodoList
     todos.each { |todo| todo.undone! }
   end
 
+  def to_a
+    todos
+  end
+
   def to_s
     text = "--- #{title} ---\n"
     text << todos.map(&:to_s).join("\n")
