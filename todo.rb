@@ -152,18 +152,3 @@ class TodoList
 
   attr_accessor :todos
 end
-
-todo1 = Todo.new("Buy milk")
-todo2 = Todo.new("Clean room")
-todo3 = Todo.new("Go to gym")
-
-list = TodoList.new("Today's Todos")
-list.add(todo1)
-list.add(todo2)
-list.add(todo3)
-
-list.mark_all_done
-list.mark_all_undone
-
-p list.all_done
-p list.all_not_done
