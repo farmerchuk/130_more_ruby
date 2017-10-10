@@ -112,7 +112,7 @@ class TodoList
     if index >= todos.size || index < 0
       raise IndexError
     else
-      todos.remove_at(index)
+      todos.delete_at(index)
     end
   end
 
