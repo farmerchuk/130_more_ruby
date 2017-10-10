@@ -38,7 +38,7 @@ class TodoList
   def each
     counter = 0
 
-    while counter < todos.size
+    while counter < todos.size && block_given?
       todo = todos[counter]
       yield(todo)
       counter += 1
