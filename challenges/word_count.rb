@@ -4,7 +4,7 @@ class Phrase
   attr_reader :words
 
   def initialize(string)
-    @words = string.downcase.scan(/\b[^,:!&@$%^. ]+\b/)
+    @words = string.downcase.scan(/\b[\w']+\b/)
   end
 
   def word_count
