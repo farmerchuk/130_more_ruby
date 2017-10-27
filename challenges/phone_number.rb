@@ -1,22 +1,15 @@
 require 'minitest/autorun'
 
 class PhoneNumber
+  INVALID = '0000000000'
+
   def initialize(string)
     @num = string
   end
 
   def number
-    alphas = num.scan(/[a-zA-Z]/).count
-    nums = num.scan(/[0-9]/).count
-
-    return '0000000000' if nums < 10 ||
-                           nums > 11 ||
-                           nums == 11 && num[0] != '1' ||
-                           alphas > 0
-
-    num.gsub!(/[^0-9]/, '')
-
-    num[0] == '1' && num.size == 11 ? num.slice(1..-1) : num
+    return INVALID unless valid_number?
+    clean_number    
   end
 
   def area_code
@@ -30,6 +23,21 @@ class PhoneNumber
   private
 
   attr_reader :num
+
+  def valid_number?
+    alphas = num.scan(/[a-zA-Z]/).count
+    nums = num.scan(/[0-9]/).count
+
+    return true unless nums < 10 ||
+                       nums > 11 ||
+                       nums == 11 && num[0] != '1' ||
+                       alphas > 0
+  end
+
+  def clean_number
+    clean = num.gsub(/[^0-9]/, '')
+    clean[0] == '1' && clean.size == 11 ? clean.slice(1..-1) : clean
+  end
 end
 
 class PhoneNumberTest < Minitest::Test
