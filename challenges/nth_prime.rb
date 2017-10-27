@@ -28,13 +28,10 @@ require 'minitest/autorun'
 class Prime
   def self.nth(n)
     raise ArgumentError if n == 0
-
     primes = [1, 2, 3, 5, 7]
     counter = 11
-
     loop do
       return primes.at(n) if primes.size > n
-
       primes << counter unless primes.any? do |x|
         next if x == 1
         counter % x == 0
