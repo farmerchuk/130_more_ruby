@@ -30,23 +30,16 @@ class Prime
     raise ArgumentError if n == 0
 
     primes = [1, 2, 3, 5, 7]
-
-    counter = Enumerator.new do |y|
-      num = 11
-      loop do
-        y << num
-        num += 1
-      end
-    end
+    counter = 11
 
     loop do
       return primes.at(n) if primes.size > n
 
-      next_num = counter.next
-      primes << next_num unless primes.any? do |x|
+      primes << counter unless primes.any? do |x|
         next if x == 1
-        next_num % x == 0
+        counter % x == 0
       end
+      counter += 1
     end
   end
 end
