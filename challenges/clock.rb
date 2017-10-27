@@ -8,22 +8,15 @@ class Clock
   end
 
   def self.at(hours, minutes = 0)
-    time = Time.new(0)
-    hours_in_seconds = hours * SEC_IN_MIN**2
-    minutes_in_seconds = minutes * SEC_IN_MIN
-    total_seconds = hours_in_seconds + minutes_in_seconds
-
-    Clock.new(time + total_seconds)
+    Clock.new(Time.new(0) + (hours * SEC_IN_MIN**2) + (minutes * SEC_IN_MIN))
   end
 
   def +(minutes)
-    minutes_in_seconds = minutes * SEC_IN_MIN
-    Clock.new(time + minutes_in_seconds)
+    Clock.new(time + (minutes * SEC_IN_MIN))
   end
 
   def -(minutes)
-    minutes_in_seconds = -minutes * SEC_IN_MIN
-    Clock.new(time + minutes_in_seconds)
+    Clock.new(time + (-minutes * SEC_IN_MIN))
   end
 
   def ==(other_clock)
