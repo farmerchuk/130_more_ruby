@@ -1,26 +1,28 @@
 require 'minitest/autorun'
 
 class Clock
+  SEC_IN_MIN = 60
+
   def initialize(time)
     @time = time
   end
 
   def self.at(hours, minutes = 0)
     time = Time.new(0)
-    hours_in_seconds = hours * 60 * 60
-    minutes_in_seconds = minutes * 60
+    hours_in_seconds = hours * SEC_IN_MIN**2
+    minutes_in_seconds = minutes * SEC_IN_MIN
     total_seconds = hours_in_seconds + minutes_in_seconds
 
     Clock.new(time + total_seconds)
   end
 
   def +(minutes)
-    minutes_in_seconds = minutes * 60
+    minutes_in_seconds = minutes * SEC_IN_MIN
     Clock.new(time + minutes_in_seconds)
   end
 
   def -(minutes)
-    minutes_in_seconds = -minutes * 60
+    minutes_in_seconds = -minutes * SEC_IN_MIN
     Clock.new(time + minutes_in_seconds)
   end
 
